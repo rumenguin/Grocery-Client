@@ -10,6 +10,7 @@ import SwiftUI
 struct RegistrationScreen: View {
     
     @EnvironmentObject private var model: GroceryModel
+    @EnvironmentObject private var appState: AppState
     
     @State private var username: String = ""
     @State private var password: String = ""
@@ -25,6 +26,7 @@ struct RegistrationScreen: View {
             let registerResponseDTO = try await model.register(username: username, password: password)
             if !registerResponseDTO.error {
                 // take the user to the login screen
+                appState.routes.append(.login)
             }else {
                 //display error
                 errorMessage = registerResponseDTO.reason ?? ""
@@ -49,6 +51,13 @@ struct RegistrationScreen: View {
                 }
                 .buttonStyle(.borderless)
                 .disabled(!isFormValid)
+                
+                Spacer()
+                
+                Button("Login") {
+                    appState.routes.append(.login)
+                }
+                .buttonStyle(.borderless)
             }
             Text(errorMessage)
         }
@@ -56,11 +65,33 @@ struct RegistrationScreen: View {
     }
 }
 
+// For SwiftUI Preview
+struct RegistrationScreenContainer: View {
+    
+    @StateObject private var model = GroceryModel()
+    @StateObject private var appState = AppState()
+    
+    var body: some View {
+        NavigationStack(path: $appState.routes) {
+            RegistrationScreen()
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                        case .register:
+                            RegistrationScreen()
+                        case .login:
+                            LoginScreen()
+                        case .groceryCategoryList:
+                            Text("Grocery View")
+                    }
+                }
+        }
+        .environmentObject(model)
+        .environmentObject(appState)
+    }
+}
+
 struct RegistrationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            RegistrationScreen()
-                .environmentObject(GroceryModel())
-        }
+        RegistrationScreenContainer()
     }
 }
