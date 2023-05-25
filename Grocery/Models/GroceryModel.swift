@@ -43,4 +43,17 @@ class GroceryModel: ObservableObject {
         return loginResponseDTO
     }
     
+    func saveGroceryCategory(_ groceryCategoryRequestDTO: GroceryCategoryRequestDTO) async throws {
+        
+        guard let userId = UserDefaults.standard.userId else {
+            return
+        }
+        
+        let resource = try Resource(url: Constants.Urls.saveGroceryCategory(userId: userId), method: .post(JSONEncoder().encode(groceryCategoryRequestDTO)), modelType: GroceryCategoryResponseDTO.self)
+        
+        let newGroceryCategory = try await httpClient.load(resource)
+        
+        //add new grocery to the list
+    }
+    
 }
