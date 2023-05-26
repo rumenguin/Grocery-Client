@@ -8,7 +8,10 @@
 import Foundation
 import GroceryAppSharedDTO
 
+@MainActor
 class GroceryModel: ObservableObject {
+    
+    @Published var groceryCategories: [GroceryCategoryResponseDTO] = []
     
     let httpClient = HTTPClient()
     
@@ -43,6 +46,33 @@ class GroceryModel: ObservableObject {
         return loginResponseDTO
     }
     
+    func deleteGroceryCategory(groceryCategoryId: UUID) async throws {
+        
+        guard let userId = UserDefaults.standard.userId else {
+            return
+        }
+        
+        let resource = Resource(url: Constants.Urls.deleteGroceryCategory(userId: userId, groceryCategoryId: groceryCategoryId), method: .delete, modelType: GroceryCategoryResponseDTO.self)
+        
+        let deleteGroceryCategory = try await httpClient.load(resource)
+        
+        //remove the deleted category from the list
+        groceryCategories = groceryCategories.filter { $0.id != deleteGroceryCategory.id }
+        
+    }
+    
+    func populateGroceryCategories() async throws {
+        
+        guard let userId = UserDefaults.standard.userId else {
+            return
+        }
+        
+        let resource = Resource(url: Constants.Urls.groceryCategoriesBy(userId: userId), modelType: [GroceryCategoryResponseDTO].self)
+        
+        groceryCategories = try await httpClient.load(resource)
+        
+    }
+    
     func saveGroceryCategory(_ groceryCategoryRequestDTO: GroceryCategoryRequestDTO) async throws {
         
         guard let userId = UserDefaults.standard.userId else {
@@ -51,9 +81,10 @@ class GroceryModel: ObservableObject {
         
         let resource = try Resource(url: Constants.Urls.saveGroceryCategory(userId: userId), method: .post(JSONEncoder().encode(groceryCategoryRequestDTO)), modelType: GroceryCategoryResponseDTO.self)
         
-        let newGroceryCategory = try await httpClient.load(resource)
+        let groceryCategory = try await httpClient.load(resource)
         
         //add new grocery to the list
+        groceryCategories.append(groceryCategory)
     }
     
 }

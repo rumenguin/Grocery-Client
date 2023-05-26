@@ -22,6 +22,7 @@ struct AddGroceryCategoryScreen: View {
         let groceryCategoryRequestDTO = GroceryCategoryRequestDTO(title: title, colorCode: colorCode)
         do {
             try await model.saveGroceryCategory(groceryCategoryRequestDTO)
+            dismiss()
         }catch {
             print(error.localizedDescription)
         }
