@@ -24,13 +24,14 @@ struct LoginScreen: View {
         do {
             let loginResponseDTO = try await model.login(username: username, password: password)
             if loginResponseDTO.error {
-                errorMessage = loginResponseDTO.reason ?? ""
+                //errorMessage = loginResponseDTO.reason ?? ""
+                appState.errorWrapper = ErrorWrapper(error: GroceryError.login, guidance: loginResponseDTO.reason ?? "")
             }else {
                 //take the user to grocery categories list screen
                 appState.routes.append(.groceryCategoryList)
             }
         }catch {
-            errorMessage = "Unable to login. Check username and password."
+            appState.errorWrapper = ErrorWrapper(error: error, guidance: error.localizedDescription)
         }
     }
     
@@ -47,10 +48,20 @@ struct LoginScreen: View {
                 }
                 .buttonStyle(.borderless)
                 .disabled(!isFormValid)
+                Spacer()
+                Button("Register") {
+                    appState.routes.append(.register)
+                }
+                .buttonStyle(.borderless)
             }
             Text(errorMessage)
         }
         .navigationTitle("Login")
+        .navigationBarBackButtonHidden(true)
+        .sheet(item: $appState.errorWrapper) { errorWrapper in
+            ErrorView(errorWrapper: errorWrapper)
+                .presentationDetents([.fraction(0.25)])
+        }
     }
 }
 

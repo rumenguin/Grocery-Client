@@ -28,6 +28,12 @@ class GroceryModel: ObservableObject {
         
     }
     
+    func logout() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "userId")
+        defaults.removeObject(forKey: "authToken")
+    }
+    
     func login(username: String, password: String) async throws -> LoginResponseDTO {
         
         let loginPostData = ["username": username, "password": password]

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35092F302A232248000520B2 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35092F2F2A232248000520B2 /* ErrorWrapper.swift */; };
+		35092F322A23228D000520B2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35092F312A23228D000520B2 /* ErrorView.swift */; };
 		353299762A1FA0B000A9750C /* AddGroceryCategoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353299752A1FA0B000A9750C /* AddGroceryCategoryScreen.swift */; };
 		353ADF852A208CBE00D635CD /* GroceryCategoryListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ADF842A208CBE00D635CD /* GroceryCategoryListScreen.swift */; };
 		353ADF872A208D4A00D635CD /* GroceryCategoryResponseDTO+ Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353ADF862A208D4A00D635CD /* GroceryCategoryResponseDTO+ Ext.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35092F2F2A232248000520B2 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
+		35092F312A23228D000520B2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		353299752A1FA0B000A9750C /* AddGroceryCategoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceryCategoryScreen.swift; sourceTree = "<group>"; };
 		353ADF842A208CBE00D635CD /* GroceryCategoryListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCategoryListScreen.swift; sourceTree = "<group>"; };
 		353ADF862A208D4A00D635CD /* GroceryCategoryResponseDTO+ Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryCategoryResponseDTO+ Ext.swift"; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 			children = (
 				359A0D442A1D0B0E00D3BB2E /* GroceryModel.swift */,
 				3550E4A12A1DF8C1006630FD /* AppState.swift */,
+				35092F2F2A232248000520B2 /* ErrorWrapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			children = (
 				359FCED72A1FA1B500B8DAE5 /* ColorSelector.swift */,
 				35F6B2E82A224781007C800C /* GroceryItemListView.swift */,
+				35092F312A23228D000520B2 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -256,10 +262,12 @@
 				353ADF852A208CBE00D635CD /* GroceryCategoryListScreen.swift in Sources */,
 				3578AF512A21D6C900B7F9E6 /* AddGroceryItemScreen.swift in Sources */,
 				3578AF4F2A21D3FE00B7F9E6 /* GroceryDetailScreen.swift in Sources */,
+				35092F322A23228D000520B2 /* ErrorView.swift in Sources */,
 				359A0D452A1D0B0E00D3BB2E /* GroceryModel.swift in Sources */,
 				35F6B2E92A224781007C800C /* GroceryItemListView.swift in Sources */,
 				3550E49E2A1DE9A5006630FD /* LoginScreen.swift in Sources */,
 				359FCEDC2A1FB86D00B8DAE5 /* UserDefaults+Ext.swift in Sources */,
+				35092F302A232248000520B2 /* ErrorWrapper.swift in Sources */,
 				353ADF872A208D4A00D635CD /* GroceryCategoryResponseDTO+ Ext.swift in Sources */,
 				35F6B2EB2A224823007C800C /* GroceryItemResponseDTO+Ext.swift in Sources */,
 				353299762A1FA0B000A9750C /* AddGroceryCategoryScreen.swift in Sources */,

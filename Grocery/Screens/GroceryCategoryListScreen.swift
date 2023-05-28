@@ -10,6 +10,7 @@ import SwiftUI
 struct GroceryCategoryListScreen: View {
     
     @EnvironmentObject private var model: GroceryModel
+    @EnvironmentObject private var appState: AppState
     @State private var isPresented: Bool = false
     
     private func fetchGroceryCategories() async {
@@ -58,10 +59,13 @@ struct GroceryCategoryListScreen: View {
             await fetchGroceryCategories()
         }
         .navigationTitle("Categories")
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Logout") {
-                    
+                    model.logout()
+                    //take the user to the login screen
+                    appState.routes.append(.login)
                 }
             }
             
